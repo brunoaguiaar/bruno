@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{33413FC9-7041-42BA-9F97-8024F15FA690}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EstouroDePilha.Dominio</RootNamespace>
+    <AssemblyName>EstouroDePilha.Dominio</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entidades\Badge.cs" />
+    <Compile Include="Entidades\ComentarioPergunta.cs" />
+    <Compile Include="Entidades\ComentarioResposta.cs" />
+    <Compile Include="Entidades\DownVotePergunta.cs" />
+    <Compile Include="Entidades\DownVoteResposta.cs" />
+    <Compile Include="Entidades\EntidadeBase.cs" />
+    <Compile Include="Entidades\Pergunta.cs" />
+    <Compile Include="Entidades\Resposta.cs" />
+    <Compile Include="Entidades\Tag.cs" />
+    <Compile Include="Entidades\UpVotePergunta.cs" />
+    <Compile Include="Entidades\UpVoteResposta.cs" />
+    <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="Excecoes\ExcecaoCampoVazio.cs" />
+    <Compile Include="Excecoes\ExcecaoUsuarioInvalido.cs" />
+    <Compile Include="Excecoes\ExcecaoUsuarioNaoExistente.cs" />
+    <Compile Include="Excecoes\UsuarioJaDeuDownVoteException.cs" />
+    <Compile Include="Excecoes\UsuarioJaDeuUpVoteException.cs" />
+    <Compile Include="Models\BadgeModel.cs" />
+    <Compile Include="Models\BadgeUsuarioHomeModel.cs" />
+    <Compile Include="Models\ComentarioRespostaModel.cs" />
+    <Compile Include="Models\PerguntaHomeModel.cs" />
+    <Compile Include="Models\PerguntaModel.cs" />
+    <Compile Include="Models\PerguntaTop5UpvoteModel.cs" />
+    <Compile Include="Models\PerguntaPerfilModel.cs" />
+    <Compile Include="Models\RegistrarUsuarioModel.cs" />
+    <Compile Include="Models\RespostaModel.cs" />
+    <Compile Include="Models\RespostaPerfilModel.cs" />
+    <Compile Include="Models\TagModel.cs" />
+    <Compile Include="Models\UsuarioBaseModel.cs" />
+    <Compile Include="Models\UsuarioPerguntaHomeModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositórios\IBadgeRepositorio.cs" />
+    <Compile Include="Repositórios\IPerguntaRepositorio.cs" />
+    <Compile Include="Repositórios\IRepositorioGenerico.cs" />
+    <Compile Include="Repositórios\IRespostaRepositorio.cs" />
+    <Compile Include="Repositórios\ITagRepositorio.cs" />
+    <Compile Include="Repositórios\IUsuarioRepositorio.cs" />
+    <Compile Include="Servicos\BadgeService.cs" />
+    <Compile Include="Servicos\IBadgeService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

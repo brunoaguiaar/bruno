@@ -1,0 +1,168 @@
+<div class="barraDeMenu" ng-include="'home/barra.de.menu.html'"><br></div>
+  <div class="login-wrapper columns">
+    <div class="column is-8">
+      <section class="hero is-fullheight">
+        <div class="hero-body">
+          <div class="container cont">
+            <div class="columns">
+              <div class="column is-10 is-offset-1">
+              <h1 class="title has-text-centered">
+                Pergunta ai guri!
+              </h1>
+              <div class="box pergunta">
+                </form name="formPergunta" novalidate>
+                  <label for="tituloPergunta" class="label has-text-centered">Título da tua pergunta</label>
+                  <input class="input"
+                      type="text"
+                      autofocus
+                      required
+                      minlength="3"
+                      maxlength="50"
+                      ng-model="novaPergunta.Titulo"
+                      placeholder="Título da tua pergunta, Tchê!">
+                  </input>
+                  <label for="tagsPergunta" class="label has-text-centered">Tags da tua pergunta</label>
+
+                  <div class="tags-input">
+                    <span class="tag is-success" ng-repeat="tagSelecionada in tagsSelecionadas">
+                      {{tagSelecionada}}
+                      <button class="delete is-small" ng-click="removeTag(tagSelecionada)"></button>
+                    </span>
+
+                    <angucomplete-alt ng-enter="adicionarTag(teste.title)"
+                        class="input-tag"
+                        type="text"
+                        required
+                        minlength="1"
+                        maxlength="80"
+                        placeholder="Tuas tags, Tchê!"
+                        id="autocomplete-form"
+                        selected-object="teste"
+                        local-data="tags"
+                        local-search="autocompleteTag"
+                        title-field="Descricao"
+                        input-class="form-control form-control-small"
+                        match-class="highlight">
+                    </angucomplete-alt>
+                  </div>
+
+                  <!--<div class="card">
+                    <div class="card-content">
+                      <div class="content">
+                        <span class="tag is-success" ng-repeat="tagSelecionada in tagsSelecionadas">
+                          {{tagSelecionada}}
+                          <button class="delete is-small" ng-click="removeTag(tagSelecionada)"></button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>   -->
+
+                  <label for="descricaoPergunta" class="label has-text-centered">Descrição da tua pergunta</label>
+                  <div class="box descricao-box">
+
+                    <nav class="botoes-desc">
+                      <a class="button is-link sem-underline" ng-click="adicionarMarkdown('B')">
+                          <span class="icon">
+                             <i class=" fa fa-bold"></i>
+                          </span>
+                        </a>
+                     
+                        <a class="button is-link sem-underline"  ng-click="adicionarMarkdown('I')">
+                          <span class="icon">
+                             <i class=" fa fa-italic"></i>
+                          </span>
+                        </a>
+                      
+                        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('OL')">
+                          <span class="icon">
+                             <i class=" fa fa-list-ol"></i>
+                          </span>
+                        </a>
+                      
+                        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('UL')">
+                          <span class="icon">
+                             <i class=" fa fa-list-ul"></i>
+                          </span>
+                        </a>
+                     
+                        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('C')">
+                          <span class="icon">
+                             <i class=" fa fa-code"></i>
+                          </span>
+                        </a>
+                     
+                        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('H')">
+                          <span class="icon">
+                             <i class=" fa fa-font"></i>
+                          </span>
+                        </a>
+                      
+                    </nav>
+                      
+                  <textarea rows="8"
+                      id="descricao"
+                      cols="52"
+                      class="textarea"
+                      type="textarea"
+                      required
+                      minlength="3"
+                      maxlength="1000"
+                      ng-model="novaPergunta.Descricao"
+                      onselect="window.listenerMudanca(this)"
+                      permitir-tab
+                      ng-trim="false"
+                      placeholder="Descrição da tua pergunta, Tchê!">
+                  </textarea>
+
+                  </div>
+                  
+
+                  <p>Tchê, a descrição vai ficar mais ou menos assim:</p>
+                  <pre><div class="box descricao-box" btf-markdown="novaPergunta.Descricao"></div></pre>
+
+
+
+                  <p class="control login">
+                  <button class="button is-warning is-fullwidth"
+                      ng-disabled="novaPergunta.$invalid"
+                      ng-click="cadastrarPergunta(novaPergunta)">
+                    Cadastrar
+                  </button>
+                  </p>
+                  </form>
+                  <a class="button is-danger is-fullwidth btnCad"
+                    ng-href="/#!/home">Voltar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="column is-4 is-hidden-mobile">
+    <section class="hero is-fullheight">
+      <div class="hero-heading">
+        <div class="section has-text-centered">
+          <img src="image/gaucho.png"
+            alt="Gaucho"
+            width="150px">
+        </div>
+      </div>
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns">
+            <div class="column is-10 is-offset-1">
+              <h1 class="title has-text-centered">Sabes usar o markdown?</h1>
+                <li>Primeiro, escreve o que tu quer formatar!</li>
+                <li>Segundo, seleciona o que tu quer formatar!</li>
+                <li>Terceiro, escolhe a tua formatação!</li>
+                <li>Agora dá uma olhada se ficou como tu queria!</li>
+                <br>
+                <p>Barbada né, Tchê?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </div>

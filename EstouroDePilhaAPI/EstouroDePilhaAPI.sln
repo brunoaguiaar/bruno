@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstouroDePilha.Dominio", "EstouroDePilha.Dominio\EstouroDePilha.Dominio.csproj", "{33413FC9-7041-42BA-9F97-8024F15FA690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstouroDePilha.Infraestrutura", "EstouroDePilha.Infraestrutura\EstouroDePilha.Infraestrutura.csproj", "{98548E4D-390D-4707-8FFA-320F4D538FA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstouroDePilha.TestesUnitarios", "EstouroDePilhaTestesUnitarios\EstouroDePilha.TestesUnitarios.csproj", "{95176FED-F51E-4A8A-994D-408E41622526}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstouroDePilha.Api", "EstouroDePilhaAPI\EstouroDePilha.Api.csproj", "{E4EF4778-A3B0-4982-A788-5BCE1B4A955A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerificadorBadgesApp", "VerificadorBadgesApp\VerificadorBadgesApp.csproj", "{A55E3050-180E-4523-B3D1-1E0CF31EA32C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33413FC9-7041-42BA-9F97-8024F15FA690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33413FC9-7041-42BA-9F97-8024F15FA690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33413FC9-7041-42BA-9F97-8024F15FA690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33413FC9-7041-42BA-9F97-8024F15FA690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98548E4D-390D-4707-8FFA-320F4D538FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98548E4D-390D-4707-8FFA-320F4D538FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98548E4D-390D-4707-8FFA-320F4D538FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98548E4D-390D-4707-8FFA-320F4D538FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95176FED-F51E-4A8A-994D-408E41622526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95176FED-F51E-4A8A-994D-408E41622526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95176FED-F51E-4A8A-994D-408E41622526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95176FED-F51E-4A8A-994D-408E41622526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4EF4778-A3B0-4982-A788-5BCE1B4A955A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4EF4778-A3B0-4982-A788-5BCE1B4A955A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4EF4778-A3B0-4982-A788-5BCE1B4A955A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4EF4778-A3B0-4982-A788-5BCE1B4A955A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A55E3050-180E-4523-B3D1-1E0CF31EA32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A55E3050-180E-4523-B3D1-1E0CF31EA32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A55E3050-180E-4523-B3D1-1E0CF31EA32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A55E3050-180E-4523-B3D1-1E0CF31EA32C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

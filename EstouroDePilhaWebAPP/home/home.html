@@ -1,0 +1,61 @@
+<div class="barraDeMenu" ng-include="'home/barra.de.menu.html'">
+</div>
+<br>
+<div class="columns">
+  <div class="column is-two-thirds is-offset-2-desktop is-12-touch">
+   <nav class="containerPerguntasERespostas nav-center">
+      <a class="pagination-link">{{totalPerguntas}}  perguntas encontradas</a>
+   </nav>
+    <div class="box column" ng-repeat="each in perguntas">
+      <div class="columns">
+        <div class="column is-8">
+
+          <div class="tituloPergunta">
+            <label class="label"><a href="/#!/pergunta/{{each.Id}}">{{each.Titulo}}</label>
+          </div>
+          <div class="tagsDaPergunta">
+            <span class="tag is-light" ng-repeat="tag in each.Tags">{{tag}}</span>
+          </div>
+          <article class="media margin-top">
+            <div class="media-left">
+              <figure class="image is-64x64 is-square">
+                <img ng-src="{{each.Usuario.UrlImagemPerfil}}">
+              </figure>
+            </div>
+            <div class="media-content">
+
+              <a ng-href="/#!/perfil/{{each.Usuario.Id}}">
+                <p>
+                  <b>{{each.Usuario.Nome}}</b>
+                </p>
+              </a>
+
+              <nav class="level is-mobile">
+                <!--trocar os numeros pelos numeros de badges do usuario-->
+                <div class="level-left">
+                  <a class="level-item">
+                    <span class="tag badge-gold">{{each.Usuario.numeroBadges.gold}}</span>
+                  </a>
+                  <a class="level-item">
+                    <span class="tag badge-silver">{{each.Usuario.numeroBadges.silver}}</span>
+                  </a>
+                  <a class="level-item">
+                    <span class="tag badge-bronze">{{each.Usuario.numeroBadges.bronze}}</span>
+                  </a>
+                </div>
+              </nav>
+            </div>
+          </article>
+        </div>
+        <div class="column">
+          <span class="pull-right">{{each.DataPergunta | date: 'dd/MM/yyyy'}}</span>
+          <!--aqui irá a seção de upvote da pergunta-->
+        </div>
+      </div>
+    </div>
+    <nav class="containerPerguntasERespostas nav-center">
+      <a class="pagination-previous" ng-click="paginaAnterior()" ng-class="{'link-disabled' : pagina == 0}">Anterior</a>
+      <a class="pagination-next" ng-click="proximaPagina()" ng-class="{'link-disabled' : (pagina + 1) * itensPagina >= totalPerguntas}">Próximo</a>
+   </nav>
+  </div>
+</div>

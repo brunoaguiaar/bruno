@@ -1,0 +1,442 @@
+<div class="barraDeMenu" ng-include="'home/barra.de.menu.html'"><br></div>
+
+<div class="container">
+
+  <section class="columns is-multiline">
+
+  <div class="box column is-8">
+    <section class="columns is-mobile is-multiline">
+      <div class="column is-12">
+        <small class="pull-right">{{pergunta.DataPergunta | date: 'dd/MM/yyyy'}}</small>
+
+        <div class="tituloPergunta">
+          <label class="label">Pergunta do bagual : "{{pergunta.Titulo}}"</label>
+        </div>
+        <div class="descricaoDaPergunta">
+          <pre><p id="pergunta" btf-markdown="pergunta.Descricao"></p></pre>
+        </div>
+        <div class="tagsDaPergunta">
+          <span class="tag is-light" ng-repeat="tags in pergunta.Tags">{{tags.Descricao}}</span>
+        </div>
+        <article class="media margin-top">
+          <div class="media-left">
+            <figure class="image is-64x64 is-square">
+              <img ng-src="{{pergunta.Usuario.UrlImagemPerfil}}">
+            </figure>
+          </div>
+          <div class="media-content">
+
+            <a ng-href="/#!/perfil/{{pergunta.Usuario.Id}}">
+              <p>
+                <b>{{pergunta.Usuario.Nome}}</b>
+              </p>
+            </a>
+            <nav class="level is-mobile">
+              <!--trocar os numeros pelos numeros de badges do usuario-->
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="tag badge-gold">{{pergunta.Usuario.numeroBadges.gold}}</span>
+                </a>
+                <a class="level-item">
+                  <span class="tag badge-silver">{{pergunta.Usuario.numeroBadges.silver}}</span>
+                </a>
+                <a class="level-item">
+                  <span class="tag badge-bronze">{{pergunta.Usuario.numeroBadges.bronze}}</span>
+                </a>
+              </div>
+            </nav>
+          </div>
+
+        </article>
+
+      </div>
+
+      <div class="column is-flex">
+        <!--aqui irá a seção de upvote da pergunta-->
+        <div class="level">
+          <div class="level-left">
+            <a class="tag" ng-class="{'link-disabled' : usuario == null || usuarioVotouEmPergunta(pergunta)}" ng-click="upvotePergunta(pergunta)">
+              <span class="quantidade-reacoes">
+                {{pergunta.QuantidadeUpVotes}}
+              </span>
+              <span class="icon is-small"><i class="fa fa-thumbs-o-up fa-2x" ng-class="{'fa fa-thumbs-up fa-2x' : usuarioDeuUpvotePergunta(pergunta)}" aria-hidden="true"></i></span>
+            </a>
+            <a class="tag" ng-class="{'link-disabled' : usuario == null || usuarioVotouEmPergunta(pergunta)}" ng-click="downvotePergunta(pergunta)">
+              <span class="quantidade-reacoes">
+                  {{pergunta.QuantidadeDownVotes}}
+              </span>
+              <span class="icon is-small"><i class="fa fa-thumbs-o-down fa-2x" ng-class="{'fa fa-thumbs-down fa-2x' : usuarioDeuDownvotePergunta(pergunta)}" aria-hidden="true"></i></span>
+            </a>
+          </div>
+
+          <div class="level-right">
+            <a class="button is-primary pull-right" ng-click="abrirFecharModal('E')" ng-if="podeEditarPergunta()">Editar</a>
+
+            <a class="pagination-link" ng-if="estaLogado" ng-click="abrirFecharModal('C')">
+              <span class="icon">
+                <i class="fa fa-comments-o" aria-hidden="true"></i>
+              </span>
+              <span>Comentar</span>
+            </a>
+          </div>
+        </div>
+        <div class="comentarios-pergunta">
+          <hr class="divisor-comentario">
+          <div ng-repeat="comentario in pergunta.Comentarios">
+            <div class="level content comentarios">
+              <span class="level-left comentario-detalhes">
+                <!-- <figure class="image is-24x24">
+                  <img  ng-src="{{comentario.Usuario.UrlImagemPerfil}}">
+                </figure> -->
+                <p>
+                  <a ng-href="/#!/perfil/{{comentario.Usuario.Id}}">
+                    <strong>{{comentario.Usuario.Nome}}:</strong>
+                  </a>
+                  <span>{{comentario.Descricao}}</span>
+                </p>
+              </span>
+              <span class="level-right data-comentario">
+                <small>
+                  {{comentario.DataComentario | date:'dd/MM/yyyy HH:mm'}}
+                </small>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="box column top-perguntas">
+    <div class="descricaoDaResposta">
+      <p><strong>Perguntas com mais upvotes</strong></p>
+
+      <p ng-repeat="pergunta in topPerguntas">
+        <a ng-href="/#!/pergunta/{{pergunta.Id}}">
+          {{pergunta.Titulo}}
+        </a>
+      </p>
+
+    </div>
+  </div>
+
+</section>
+  <div class="column is-8">
+  <nav class="containerPerguntasERespostas nav-center">
+    <a class="pagination-link button is-static">{{totalDeRespostas}} respostas encontradas</a>
+
+    <a class="pagination-link" ng-if="estaLogado" ng-click="abrirFecharModal('R')">
+      <span class="icon">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </span>
+      <span>Responder</span>
+    </a>
+
+  </nav>
+</div>
+  <div class="box column is-8" ng-repeat="resposta in respostas">
+    <div class="descricaoDaResposta">
+      <section class="level usuario-resposta-info">
+        <div class="level-left upvote is-flex">
+          <!-- aqui vai o upvote -->
+          <a class="tag resposta-vote" ng-class="{'link-disabled' : usuario == null || usuarioVotouEmResposta(resposta)}" ng-click="upvoteResposta(resposta)">
+            <span class="quantidade-reacoes">
+              {{resposta.QuantidadeUpVotes}}
+            </span>
+            <span class="icon is-small"><i class="fa fa-thumbs-o-up fa-2x" ng-class="{'fa fa-thumbs-up fa-2x' : usuarioDeuUpvoteResposta(resposta)}" aria-hidden="true"></i></span>
+          </a>
+          <a class="tag resposta-vote" ng-class="{'link-disabled' : usuario == null || usuarioVotouEmResposta(resposta)}" ng-click="downvoteResposta(resposta)">
+            <span class="quantidade-reacoes">
+              {{resposta.QuantidadeDownVotes}}
+            </span>
+            <span class="icon is-small"><i class="fa fa-thumbs-o-down fa-2x" ng-class="{'fa fa-thumbs-down fa-2x' : usuarioDeuDownvoteResposta(resposta)}" aria-hidden="true"></i></span>
+          </a>
+
+          <a class="button pagination-link is-static resposta-button borderless" ng-if ="resposta.EhRespostaCorreta"  name="button">
+              <span class="icon">
+                <i class="fa fa-check is-pulled-right"  aria-hidden="true"></i>
+              </span>
+            </a>
+          <div class="details"  ng-if="estaLogado">
+             <a class="pagination-link resposta-button" 
+                 ng-if = "usuarioQueFezAPerguntaNaoMarcouNenhumaRespostaComoCorreta()" 
+                 ng-click = "marcarComoCorreta(resposta.Id)" name="button">             
+                 <spanclass="icon">
+                     <i class=" fa fa-check"></i>
+                 </span>
+              </a>  
+
+            </div>            
+
+            <a class="button pagination-link resposta-button borderless"
+                  ng-click="abrirFecharEdicaoResposta($index)"
+                  ng-if="(usuario.Id === resposta.Usuario.Id && dataDeEdicao(pergunta) || ehGauderio())">
+              <span class="icon">
+                  <i class=" fa fa-pencil"></i>
+              </span>
+            </a>
+        </div>
+
+          <div class="level-item"></div>
+
+          <div class="level-right resposta-button-wrapper">
+            <a class="usuario-resposta-info-inner" ng-href="/#!/perfil/{{resposta.Usuario.Id}}">
+              <img ng-src="{{resposta.Usuario.UrlImagemPerfil}}" class="image is-24x24">
+
+              <p class="resposta-usuario-nick is-inline">
+                <b>
+                    <!-- trocar para o nickname apos implementação -->
+                    {{resposta.Usuario.Nome}}
+                  </b>
+              </p>
+              <p class="is-inline">
+                <small class="resposta-usuario-data">
+                  às {{resposta.DataResposta | date:'dd/MM/yyyy HH:mm'}}
+                </small>
+              </p>
+            </a>
+
+          </div>
+
+      </section>
+
+      <article class="resposta-descricao">
+        <pre><p btf-markdown="resposta.Descricao"></p></pre>
+      </article>
+
+      <div class="comentarios-resposta">
+        <hr class="divisor-comentario">
+        <div ng-repeat="comentario in resposta.Comentarios">
+          <div class="level content comentarios">
+            <span class="level-left comentario-detalhes">
+              <p>
+                <a ng-href="/#!/perfil/{{comentario.Usuario.Id}}">
+                  <strong>{{comentario.Usuario.Nome}}:</strong>
+                </a>
+                <span>{{comentario.Descricao}}</span>
+              </p>
+            </span>
+            <span class="level-right">
+              <small>
+                {{comentario.DataComentario | date:'dd/MM/yyyy HH:mm'}}
+              </small>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- form de comentario  -->
+      <form novalidate>
+        <div class="comentario-textarea"  ng-if="estaLogado">
+          <textarea class="textarea comentario-textarea-inner"
+                    type="textarea"
+                    ng-model="comentario.Descricao"
+                    rows="1"
+                    placeholder="Escreva um comentário. Enter para enviar."
+                    ng-enter="comentarResposta(resposta.Id, comentario)"
+                    permitir-tab>
+          </textarea>
+        </div>
+      </form>
+
+      <!-- form de edição -->
+      <form novalidate class="form-resposta-fechado" ng-class="{'form-resposta-edicao': resposta.edicao}">
+        <p class="title is-5">Editar resposta:</p>
+        <textarea class="textarea" ng-model="resposta.Descricao"></textarea>
+        <div class="level margin-top">
+          <a class="button is-success zero-radius level-item" ng-click ="editarResposta(resposta)">Salvar</a>
+          <a class="button is-danger zero-radius level-item" ng-click="abrirFecharEdicaoResposta($index)">Cancelar</a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+  <nav class="containerPerguntasERespostas nav-center" ng-if = "totalDeRespostas > 5 ">
+    <a class="pagination-previous is-centered" ng-class=  "{'link-disabled' : pagina == 0}"  ng-click = "anterior()" >Anterior</a>
+    <a class="pagination-next is-centered" ng-class = "{'link-disabled' : ultimaPagina == true}" ng-click = "proxima()">Próxima</a>
+  </nav>
+</div>
+
+
+<!-- div de edição -->
+<div id="div-edicao">
+  <form id="form-edicao" name="formEdicao" novalidate>
+    <label for="tituloPergunta" class="label has-text-centered">Título da tua pergunta</label>
+    <input class="input"
+        type="text"
+        autofocus
+        required
+        name="perguntaTitulo"
+        minlength="3"
+        maxlength="50"
+        ng-model="pergunta.Titulo">
+    </input>
+    <p ng-show="formEdicao.perguntaTitulo.$invalid" class="help is-danger">Pô, tchê! Não se esquece do título.</p>
+
+    <div class="box descricao-box">
+
+      <nav class="botoes-desc">
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('B', 'pergunta')">
+          <span class="icon">
+              <i class=" fa fa-bold"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline"  ng-click="adicionarMarkdown('I', 'pergunta')">
+          <span class="icon">
+              <i class=" fa fa-italic"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('OL', 'pergunta')">
+          <span class="icon">
+              <i class=" fa fa-list-ol"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('UL', 'pergunta')">
+          <span class="icon">
+              <i class=" fa fa-list-ul"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('C', 'pergunta')">
+          <span class="icon">
+              <i class=" fa fa-code"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('H', 'pergunta')">
+          <span class="icon">
+              <i class=" fa fa-font"></i>
+          </span>
+        </a>
+
+      </nav>
+
+      <textarea
+          id="descricao"
+          class="textarea"
+          type="textarea"
+          required
+          name="perguntaDescricao"
+          minlength="3"
+          maxlength="5000"
+          ng-model="pergunta.Descricao"
+          onselect="window.listenerMudanca(this)"
+          permitir-tab
+          ng-trim="false">
+      </textarea>
+      <p ng-show="formEdicao.perguntaDescricao.$invalid" class="help is-danger">Me coloca aí a descrição guri</p>
+
+
+    </div>
+    <div class="level">
+      <a class="button is-success zero-radius level-item" ng-click ="editarPergunta(pergunta)">Salvar</a>
+      <a class="button is-danger zero-radius level-item" ng-click="cancelarEdicao()">Cancelar</a>
+    </div>
+
+  </form>
+</div>
+
+<!-- div de responder -->
+
+<div id="div-responder">
+  <form id="form-responder" name="formResponder" novalidate>
+    <p class="title is-5 margin-top">Descreve aí o que tu quer dizer:</p>
+    <div class="box descricao-box">
+
+      <nav class="botoes-desc">
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('B', 'responder')">
+          <span class="icon">
+              <i class=" fa fa-bold"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline"  ng-click="adicionarMarkdown('I', 'responder')">
+          <span class="icon">
+              <i class=" fa fa-italic"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('OL', 'responder')">
+          <span class="icon">
+              <i class=" fa fa-list-ol"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('UL', 'responder')">
+          <span class="icon">
+              <i class=" fa fa-list-ul"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('C', 'responder')">
+          <span class="icon">
+              <i class=" fa fa-code"></i>
+          </span>
+        </a>
+
+        <a class="button is-link sem-underline" ng-click="adicionarMarkdown('H', 'responder')">
+          <span class="icon">
+              <i class=" fa fa-font"></i>
+          </span>
+        </a>
+
+      </nav>
+
+      <textarea
+          id="descricao"
+          class="textarea"
+          type="textarea"
+          required
+          name="responderDescricao"
+          minlength="3"
+          maxlength="1000"
+          ng-model="responder.Descricao"
+          onselect="window.listenerMudanca(this)"
+          permitir-tab
+          ng-trim="false">
+      </textarea>
+      <p ng-show="formResponder.responderDescricao.$invalid" class="help is-danger">Tu não podes responder dizendo nada com nada, tchê</p>
+
+
+    </div>
+   <p class="subtitle is-5">Vai ficar tipo assim:</p>
+   <pre><div class="box descricao-box" btf-markdown="responder.Descricao"></div></pre>
+    <div class="level">
+      <a class="button is-success zero-radius level-item" ng-click ="responderPergunta()">Responder</a>
+      <a class="button is-danger zero-radius level-item" ng-click="abrirFecharModal('R')">Cancelar</a>
+    </div>
+
+  </form>
+</div>
+
+<!-- div de comentar Resposta -->
+
+<div id="div-comentar">
+  <form id="form-comentar" name="formComentar" novalidate>
+    <p class="subtitle is-4">Descreve aí o teu comentario:</p>
+    <div class="box descricao-box">
+      <textarea
+          id="comentario"
+          class="textarea"
+          type="textarea"
+          required
+          name="comentarPergunta"
+          maxlength="1000"
+          ng-model="comentario.Descricao"
+          onselect="window.listenerMudanca(this)"
+          permitir-tab
+          ng-trim="false">
+      </textarea>
+      <p ng-show="formComentar.comentarPergunta.$invalid" class="help is-danger">Comenta ai, tchê</p>
+    </div>
+      <a class="button is-success zero-radius level-item" ng-click ="comentarPergunta(comentario, pergunta.Id)">Comentar</a>
+      <a class="button is-danger zero-radius level-item" ng-click="abrirFecharModal('C')">Cancelar</a>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,67 @@
+<div class="login-wrapper columns">
+  <div class="column is-8 is-hidden-mobile hero-banner">
+    <section class="hero is-fullheight is-dark">
+      <div class="hero-body">
+        <div class="container section">
+          <div class="has-text-right">
+            <p class="title is-3">Estouro de pilha</p>
+            <br>
+            <p class="title is-3">Te loga ai tchê!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="column is-4">
+    <section class="hero is-fullheight">
+      <div class="hero-heading">
+        <div class="section has-text-centered">
+          <img src="image/gaucho.png"
+            alt="Gaucho"
+            width="150px">
+        </div>
+      </div>
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns">
+            <div class="column is-8 is-offset-2">
+              <form class="login-form">
+                <p class="control has-icon has-icon-right">
+                  <input class="input email-input"
+                      type="text"
+                      autofocus
+                      required
+                      ng-model="usuario.email"
+                      placeholder="email">
+                  <span class="icon user">
+                    <i class="fa fa-user"></i>
+                  </span>
+                </p>
+                <br>
+                <p class="control has-icon has-icon-right">
+                  <input class="input password-input"
+                      type="password"
+                      required
+                      ng-model="usuario.senha"
+                      placeholder="●●●●●●">
+                  <span class="icon user">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                </p>
+                <p class="control login">
+                  <button class="button is-success is-outlined is-fullwidth"
+                      ng-disabled="login.$invalid"
+                      ng-click="login()">
+                    Login
+                  </button>
+                </p>
+              </form>
+              <a class="button is-success is-outlined is-fullwidth btnCad"
+                  ng-href="/#!/cadastro">Cadastrar-se</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

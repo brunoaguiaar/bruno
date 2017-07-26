@@ -1,0 +1,111 @@
+<div class="barraDeMenu" ng-include="'home/barra.de.menu.html'"><br></div>
+ <div class="container">
+   <section class="columns is-multiline">
+     <div class="box column is-8">
+       <section class="columns is-mobile is-multiline">
+         <div class="column">
+           <div class="field">
+             <label class="label">Busca aí!</label>
+               <p class="control">
+                 <input class="input" type="text" placeholder="Conteúdo" ng-model = "conteudo">
+               </p>
+             <label class="label">Digita as tags, guri!</label>
+              <div class="tags-input">
+                <span class="tag is-success" ng-repeat="tagSelecionada in tagsSelecionadas">
+                  {{tagSelecionada}}
+                  <button class="delete is-small" ng-click="removeTag(tagSelecionada)"></button>
+                </span>
+
+                <angucomplete-alt ng-enter="adicionarTag(teste.title)"
+                    class="input-tag"
+                    type="text"
+                    required
+                    minlength="1"
+                    maxlength="80"
+                    placeholder="Tags"
+                    id="autocomplete-form"
+                    selected-object="teste"
+                    local-data="tags"
+                    local-search="autocompleteTag"
+                    title-field="Descricao"
+                    input-class="form-control form-control-small"
+                    match-class="highlight">
+                </angucomplete-alt>
+              </div>
+           </div>
+           <p class="control">
+             <button class="button is-primary" ng-click = "pesquisar(conteudo)">Buscar</button>
+           </p>
+         </div>
+       </section>
+     </div>
+     <div class="box column is-hidden-mobile">
+       <div class="descricaoDaResposta">
+         <p>
+           <strong>Importante!</strong>
+         </p>
+         <p>Tchê, busca direito.</p>
+         <p>Não me dá uma de guri.</p>
+         <p>Tu podes filtrar por:</p>
+         <li>Tags</li>
+         <li>Descrição e título</li>
+         <li>Tags, descrição e título</li>
+       </div>
+     </div>
+   </section>
+   <div class="box column is-8">
+     <nav class="containerPerguntasERespostas nav-center" ng-if = "numeroDeResultadosDaPesquisa >=0">
+       <a class="pagination-link">{{numeroDeResultadosDaPesquisa}} perguntas encontradas</a>
+     </nav>
+   </div>
+   <div class="box column is-8" ng-repeat= "pergunta in perguntasPesquisadas">
+     <section class="columns is-mobile is-multiline">
+       <div class="column is-10">
+         <div class="tituloPergunta">
+           <a ng-href="#!/pergunta/{{pergunta.Id}}">Pergunta do bagual : {{pergunta.Titulo}}</a>
+         </div>
+         <div class="descricaoPergunta">
+           <p>{{pergunta.Descricao}}</p>
+         </div>
+         <div class="tagsDaPergunta">
+           <span class="tag is-light" ng-repeat="tags in pergunta.Tags">{{tags.Descricao}}</span>
+         </div>
+         <article class="media margin-top">
+           <div class="media-left">
+             <figure class="image is-64x64 is-square">
+               <img ng-src="{{pergunta.Usuario.UrlImagemPerfil}}">
+             </figure>
+           </div>
+           <div class="media-content">
+             <a ng-href="/#!/perfil/{{pergunta.Usuario.Id}}">
+               <p>
+                 <b>{{pergunta.Usuario.Nome}}</b>
+               </p>
+             </a>
+             <nav class="level is-mobile">
+               <div class="level-left">
+                 <a class="level-item">
+                   <span class="tag is-warning">{{pergunta.Usuario.numeroBadges.gold}}</span>
+                 </a>
+                 <a class="level-item">
+                   <span class="tag is-light">{{pergunta.Usuario.numeroBadges.silver}}</span>
+                 </a>
+                 <a class="level-item">
+                   <span class="tag is-danger">{{pergunta.Usuario.numeroBadges.bronze}}</span>
+                 </a>
+               </div>
+             </nav>
+           </div>
+         </article>
+       </div>
+       <div class="column">
+         <small class="pull-right">{{pergunta.DataPergunta | date: 'dd/MM/yyyy'}}</small>
+         <!--aqui irá a seção de upvote da pergunta-->
+       </div>
+    </section>
+  </div>
+  <nav class="containerPerguntasERespostas nav-center"  ng-if = "mostrarPaginacao">
+    <a class="pagination-previous is-centered" title="This is the first page"  ng-class="{'link-disabled' : pagina == 0}"  ng-click = "anterior()" >Anterior</a>
+    <a class="pagination-next is-centered" ng-class="{'link-disabled' : ultimaPagina== true}" ng-click = "proxima()">Próxima</a>
+  </nav>
+</div>
